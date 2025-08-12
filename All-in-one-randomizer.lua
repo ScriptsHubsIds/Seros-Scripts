@@ -22,6 +22,7 @@ local petTable = {
     ["Dinosaurs Egg"] = { "Raptor", "Triceratops", "Stegosaurus" },
     ["Primal Egg"] = { "Parasaurolophus", "Iguanodon", "Pachycephalosaurus" },
     ["Zen Egg"] = { "Shiba Inu", "Nihonzaru", "Tanuki", "Tanchozuru", "Kappa" },
+    ["Gourment Egg"] = { "Bagel Bunny", "Pancake Mole", "Sushi Bear", "Spaghetti Sloth" },
 }
 
 local espEnabled = trueS
@@ -147,12 +148,12 @@ end
 
 local function countdownAndRandomize(button)
     for i = 10, 1, -1 do
-        button.Text = "ðŸŽ² Randomize in: " .. i
+        button.Text = "Randomize in: " .. i
         wait(1)
     end
     flashEffect(button)
     randomizeNearbyEggs()
-    button.Text = "ðŸŽ² Randomize Pets"
+    button.Text = "Randomize Pets"
 end
 
 -- ðŸŒ¿ GUI Setup
@@ -171,7 +172,7 @@ Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 10)
 local title = Instance.new("TextLabel", frame)
 title.Size = UDim2.new(1, 0, 0, 30)
 title.BackgroundTransparency = 1
-title.Text = "ðŸ¾ Pet Randomizer âœ¨"
+title.Text = "Pet Randomizer âœ¨"
 title.Font = Enum.Font.FredokaOne
 title.TextSize = 22
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -201,7 +202,7 @@ local randomizeBtn = Instance.new("TextButton", frame)
 randomizeBtn.Size = UDim2.new(1, -20, 0, 40)
 randomizeBtn.Position = UDim2.new(0, 10, 0, 40)
 randomizeBtn.BackgroundColor3 = Color3.fromRGB(128, 0, 128)
-randomizeBtn.Text = "ðŸŽ² Randomize Pets"
+randomizeBtn.Text = "Randomize Pets"
 randomizeBtn.TextSize = 20
 randomizeBtn.Font = Enum.Font.FredokaOne
 randomizeBtn.TextColor3 = Color3.new(1, 1, 1)
@@ -214,13 +215,13 @@ local toggleBtn = Instance.new("TextButton", frame)
 toggleBtn.Size = UDim2.new(1, -20, 0, 40)
 toggleBtn.Position = UDim2.new(0, 10, 0, 90)
 toggleBtn.BackgroundColor3 = Color3.fromRGB(205, 92, 122) -- Light pink
-toggleBtn.Text = "ðŸ‘ï¸ ESP: ON"
+toggleBtn.Text = "ESP: ON"
 toggleBtn.TextSize = 18
 toggleBtn.Font = Enum.Font.FredokaOne
 toggleBtn.TextColor3 = Color3.new(1, 1, 1)
 toggleBtn.MouseButton1Click:Connect(function()
     espEnabled = not espEnabled
-    toggleBtn.Text = espEnabled and "ðŸ‘ï¸ ESP: ON" or "ðŸ‘ï¸ ESP: OFF"
+    toggleBtn.Text = espEnabled and "ESP: ON" or "ESP: OFF"
     for _, egg in pairs(getPlayerGardenEggs(60)) do
         if espEnabled then
             applyEggESP(egg, truePetMap[egg])
@@ -235,7 +236,7 @@ local autoBtn = Instance.new("TextButton", frame)
 autoBtn.Size = UDim2.new(1, -20, 0, 40)
 autoBtn.Position = UDim2.new(0, 10, 0, 140)
 autoBtn.BackgroundColor3 = Color3.fromRGB(134, 87, 133) -- Light blue
-autoBtn.Text = "ðŸ” Auto Randomize: OFF"
+autoBtn.Text = " Auto Randomize: OFF"
 autoBtn.TextSize = 16
 autoBtn.Font = Enum.Font.FredokaOne
 autoBtn.TextColor3 = Color3.new(1, 1, 1)
@@ -245,19 +246,19 @@ local bestPets = {
     ["Raccoon"] = true, ["Dragonfly"] = true, ["Queen Bee"] = true,
     ["Disco Bee"] = true, ["Fennec Fox"] = true, ["Fox"] = true,
     ["Mimic Octopus"] = true, ["T-Rex"] = true, ["Spinosaurus"] = true,
-    ["Kitsune"] = true
+    ["Kitsune"] = true, ["French Fry Ferret"] = true
 }
 
 autoBtn.MouseButton1Click:Connect(function()
     autoRunning = not autoRunning
-    autoBtn.Text = autoRunning and "ðŸ” Auto Randomize: ON" or "ðŸ” Auto Randomize: OFF"
+    autoBtn.Text = autoRunning and "Auto Randomize: ON" or "Auto Randomize: OFF"
     coroutine.wrap(function()
         while autoRunning do
             countdownAndRandomize(randomizeBtn)
             for _, petName in pairs(truePetMap) do
                 if bestPets[petName] then
                     autoRunning = false
-                    autoBtn.Text = "ðŸ” Auto Randomize: OFF"
+                    autoBtn.Text = " Auto Randomize: OFF"
                     return
                 end
             end
@@ -271,7 +272,7 @@ local loadAgeBtn = Instance.new("TextButton", frame)
 loadAgeBtn.Size = UDim2.new(1, -20, 0, 40)
 loadAgeBtn.Position = UDim2.new(0, 10, 0, 190)
 loadAgeBtn.BackgroundColor3 = Color3.fromRGB(40, 43, 74) -- Dark purple
-loadAgeBtn.Text = "ðŸ•’ Load Pet Age 50 Script"
+loadAgeBtn.Text = "Load Pet Age 50 Script"
 loadAgeBtn.TextSize = 16
 loadAgeBtn.Font = Enum.Font.FredokaOne
 loadAgeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -285,7 +286,7 @@ local mutationBtn = Instance.new("TextButton", frame)
 mutationBtn.Size = UDim2.new(1, -20, 0, 40)
 mutationBtn.Position = UDim2.new(0, 10, 0, 240)
 mutationBtn.BackgroundColor3 = Color3.fromRGB(216, 148, 169) -- Pink
-mutationBtn.Text = " NEW ðŸ”¬ Pet Mutation Finder"
+mutationBtn.Text = "Pet Mutation Finder"
 mutationBtn.TextSize = 16
 mutationBtn.Font = Enum.Font.FredokaOne
 mutationBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
